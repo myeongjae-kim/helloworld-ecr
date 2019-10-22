@@ -83,10 +83,10 @@ t.add_resource(Cluster(
 t.add_resource(Role(
     'EcsClusterRole',
     ManagedPolicyArns=[
-        'arn:aws:iam:aws:policy/service-role/AmazonEC2RoleforSSM',
-        'arn:aws:iam:aws:policy/AmazonEC2ContainerRegistryReadOnly',
-        'arn:aws:iam:aws:policy/service-role/AmazonEC2ContainerServiceforEc2Role',
-        'arn:aws:iam:aws:policy/CloudWatchFullAccess'
+        'arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforSSM',
+        'arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly',
+        'arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role',
+        'arn:aws:iam::aws:policy/CloudWatchFullAccess'
         ],
     AssumeRolePolicyDocument={
         'Version': '2012-10-17',
