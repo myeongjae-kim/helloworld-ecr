@@ -1,3 +1,4 @@
+"""Generating CloudFormation template."""
 from troposphere import (
         Export,
         Join,
