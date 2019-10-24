@@ -1,15 +1,16 @@
 """Generating CloudFormation template."""
+
 from troposphere import (
-        Export,
-        Join,
-        Output,
-        Parameter,
-        Ref,
-        Template
+    Export,
+    Join,
+    Output,
+    Parameter,
+    Ref,
+    Template
 )
 from troposphere.ecr import Repository
 
-t = Template();
+t = Template()
 
 t.set_description("Effective DevOps in AWS: ECR Repository")
 
