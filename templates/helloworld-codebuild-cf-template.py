@@ -21,7 +21,7 @@ from troposphere.codebuild import (
 from troposphere.iam import Role
 
 t = Template()
-t.add_description("Effective DevOps in AWS: CodeBuild - Helloworld container")
+t.set_description("Effective DevOps in AWS: CodeBuild - Helloworld container")
 
 t.add_resource(Role(
     "ServiceRole",
@@ -36,11 +36,11 @@ t.add_resource(Role(
     ),
     Path="/",
     ManagedPolicyArns=[
-        'arn:aws:iam:aws:policy/AWSCodePipelineReadOnlyAccess',
-        'arn:aws:iam:aws:policy/AwsCodeBuildDeveloperAccess',
-        'arn:aws:iam:aws:policy/AmazonEC2ContainerRegistryPowerUser',
-        'arn:aws:iam:aws:policy/AmazonS3FullAccess',
-        'arn:aws:iam:aws:policy/CloudWatchLogFullAccess',
+        'arn:aws:iam::aws:policy/AWSCodePipelineReadOnlyAccess',
+        'arn:aws:iam::aws:policy/AwsCodeBuildDeveloperAccess',
+        'arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryPowerUser',
+        'arn:aws:iam::aws:policy/AmazonS3FullAccess',
+        'arn:aws:iam::aws:policy/CloudWatchLogsFullAccess',
     ]
 ))
 
@@ -76,7 +76,7 @@ phases:
   post_build:
     commands:
       - docker push "$(cat /tmp/build_tag.txt)"
-      - aws ecr batch-get-image --repository-name $REPOSITORY_NAME --image-ids imageTag="$(cat /tmp/tag.txt)" --query 'images[].imageManifest' | tee /tmp/latest_manifest.json
+      - aws ecr batch-get-image --repository-name $REPOSITORY_NAME --image-ids imageTag="$(cat /tmp/tag.txt)" --query 'images[].imageManifest' --output=json | tee /tmp/latest_manifest.json
       - aws ecr put-image --repository-name $REPOSITORY_NAME --image-tag latest --image-manifest $(cat /tmp/latest_manifest.json)
   artifacts:
     artifacts:
@@ -98,3 +98,5 @@ t.add_resource(Project(
         Name="output"
     ),
 ))
+
+print(t.to_json())
