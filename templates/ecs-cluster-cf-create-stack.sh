@@ -7,6 +7,6 @@ aws cloudformation create-stack \
 --capabilities CAPABILITY_IAM \
 --template-body file://ecr-cluster-cf.template \
 --parameters \
-ParameterKey=KeyPair,ParameterValue=EffectiveDevOpsAws \
-ParameterKey=VpcId,ParameterValue=vpc-aa07c7c1 \
-ParameterKey=PublicSubnet,ParameterValue=subnet-6f5aa804\\,subnet-43a3850f\\,subnet-4d03ac36
+ParameterKey=KeyPair,ParameterValue=EffectiveDevOpsAWS \
+ParameterKey=VpcId,ParameterValue=vpc-d84b50b0 \
+ParameterKey=PublicSubnet,ParameterValue=subnet-7105c00a\\,subnet-50552c1c\\,subnet-69170201
