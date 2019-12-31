@@ -113,7 +113,7 @@ t.add_resource(Pipeline(
                         Category="Source",
                         Owner="ThirdParty",
                         Version="1",
-                        Provider="Github"
+                        Provider="GitHub"
                     ),
                     Configuration={
                         "Owner": "ToBeConfiguredLater",
