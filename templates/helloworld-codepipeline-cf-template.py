@@ -171,7 +171,7 @@ t.add_resource(Pipeline(
                         "ChangeSetName": "Deploy",
                         "ActionMode": "CREATE_UPDATE",
                         "StackName": "staging-helloworld-ecs-service",
-                        "Capabilities": "CAPABILITIES_NAMED_IAM",
+                        "Capabilities": "CAPABILITY_NAMED_IAM",
                         "TemplatePath": "App::templates/helloworld-ecs-service-cf.template",
                         "RoleArn": GetAtt("CloudFormationHelloworldRole", "Arn"),
                         "ParameterOverrides": """{"Tag": {
@@ -220,7 +220,7 @@ t.add_resource(Pipeline(
                         "ChangeSetName": "Deploy",
                         "ActionMode": "CREATE_UPDATE",
                         "StackName": "production-helloworld-ecs-service",
-                        "Capabilities": "CAPABILITIES_NAMED_IAM",
+                        "Capabilities": "CAPABILITY_NAMED_IAM",
                         "TemplatePath": "App::templates/helloworld-ecs-service-cf.template",
                         "RoleArn": GetAtt("CloudFormationHelloworldRole", "Arn"),
                         "ParameterOverrides": """{"Tag": {
