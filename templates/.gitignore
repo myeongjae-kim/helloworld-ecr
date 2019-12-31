@@ -1,1 +1,2 @@
 *.template
+!helloworld-ecs-service-cf.template
