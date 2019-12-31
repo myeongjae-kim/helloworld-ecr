@@ -90,6 +90,7 @@ t.add_resource(Role(
                     {"Effect": "Allow", "Action": "ecr:*", "Resource": "*"},
                     {"Effect": "Allow", "Action": "ecs:*", "Resource": "*"},
                     {"Effect": "Allow", "Action": "iam:*", "Resource": "*"},
+                    {"Effect": "Allow", "Action": "s3:*", "Resource": "*"},
                 ]
             }
         )
