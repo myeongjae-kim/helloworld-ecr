@@ -224,7 +224,7 @@ t.add_resource(Pipeline(
                         "TemplatePath": "App::templates/helloworld-ecs-service-cf.template",
                         "RoleArn": GetAtt("CloudFormationHelloworldRole", "Arn"),
                         "ParameterOverrides": """{"Tag": {
-                          "Fn::GetParam" : [ "BuildOutput", "build.json", "tag ] }
+                          "Fn::GetParam" : [ "BuildOutput", "build.json", "tag" ] }
                           }"""
                     },
                     InputArtifacts=[
