@@ -111,7 +111,7 @@ t.add_resource(Pipeline(
                     Name="Source",
                     ActionTypeId=ActionTypeId(
                         Category="Source",
-                        Owner="ThirdPary",
+                        Owner="ThirdParty",
                         Version="1",
                         Provider="Github"
                     ),
