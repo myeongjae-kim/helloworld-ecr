@@ -2,7 +2,7 @@
 
 python ./ecs-cluster-cf-template.py > ecr-cluster-cf.template
 
-awski cloudformation create-stack \
+aws cloudformation create-stack \
 --stack-name staging-cluster \
 --capabilities CAPABILITY_IAM \
 --template-body file://ecr-cluster-cf.template \
