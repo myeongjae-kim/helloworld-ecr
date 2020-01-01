@@ -8,7 +8,7 @@ COPY helloworld.js package.json /usr/local/helloworld/
 
 WORKDIR /usr/local/helloworld/
 
-RUN ${browser_env} npm install --production
+RUN export ${browser_env} && npm install --production
 
 EXPOSE 3000
 
