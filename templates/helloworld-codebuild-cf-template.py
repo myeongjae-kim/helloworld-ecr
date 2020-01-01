@@ -58,6 +58,8 @@ environment = Environment(
              ".amazonaws.com",
              "/",
              "helloworld"])},
+        {'Name': 'BROWSER_ENV_JSON', 'Value': 'JSON format required. ex) {"FOO":"foo", "BAR":"bar"}. DO NOT WRITE SECRET VALUES HERE. INSTEAD, USE NODE_ENV'},
+        {'Name': 'NODE_ENV_JSON', 'Value': '{"BAZ":"baz", "HOO":"hoo"}'},
     ]
 )
 
@@ -68,11 +70,12 @@ phases:
       - aws codepipeline get-pipeline-state --name "${CODEBUILD_INITIATOR##*/}" --query stageStates[?actionStates[0].latestExecution.externalExecutionId==\`$CODEBUILD_BUILD_ID\`].latestExecution.pipelineExecutionId --output=text > /tmp/execution_id.txt
       - aws codepipeline get-pipeline-execution --pipeline-name "${CODEBUILD_INITIATOR##*/}" --pipeline-execution-id $(cat /tmp/execution_id.txt) --query 'pipelineExecution.artifactRevisions[0].revisionId' --output=text > /tmp/tag.txt
       - printf "%s:%s" "$REPOSITORY_URI" "$(cat /tmp/tag.txt)" > /tmp/build_tag.txt
-      - printf '{"tag":"%s"}' "$(cat /tmp/tag.txt)" | tee /tmp/build.json
+      - printf '{"tag":"%s", "node_env":"%s"}' "$(cat /tmp/tag.txt)" | tee /tmp/build.json $NODE_ENV_JSON
       - $(aws ecr get-login --no-include-email)
   build:
     commands:
-      - docker build --build-arg browser_env='ABC=abc DEF=def' -t "$(cat /tmp/build_tag.txt)" .
+      - BROWSER_ENV=$(echo $BROWSER_ENV_JSON | jq -r "to_entries|map(\\"\\(.key)=\\(.value|tostring)\\")|.[]" | tr "\\n" " ")
+      - docker build --build-arg browser_env=$BROWSER_ENV -t "$(cat /tmp/build_tag.txt)" .
   post_build:
     commands:
       - docker push "$(cat /tmp/build_tag.txt)"
