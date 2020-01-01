@@ -70,7 +70,7 @@ phases:
       - aws codepipeline get-pipeline-state --name "${CODEBUILD_INITIATOR##*/}" --query stageStates[?actionStates[0].latestExecution.externalExecutionId==\`$CODEBUILD_BUILD_ID\`].latestExecution.pipelineExecutionId --output=text > /tmp/execution_id.txt
       - aws codepipeline get-pipeline-execution --pipeline-name "${CODEBUILD_INITIATOR##*/}" --pipeline-execution-id $(cat /tmp/execution_id.txt) --query 'pipelineExecution.artifactRevisions[0].revisionId' --output=text > /tmp/tag.txt
       - printf "%s:%s" "$REPOSITORY_URI" "$(cat /tmp/tag.txt)" > /tmp/build_tag.txt
-      - printf '{"tag":"%s", "node_env":%s}' "$(cat /tmp/tag.txt)" "$(echo $NODE_ENV_JSON)" | tee /tmp/build.json
+      - printf '{"tag":"%s", "node_env":"%s"}' "$(cat /tmp/tag.txt)" "$(echo $NODE_ENV_JSON | tr '"' '\\"')" | tee /tmp/build.json
       - $(aws ecr get-login --no-include-email)
   build:
     commands:
