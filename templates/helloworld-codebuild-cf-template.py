@@ -75,6 +75,7 @@ phases:
   build:
     commands:
       - echo $BROWSER_ENV_JSON
+      - echo $BROWSER_ENV_JSON | jq -r "to_entries|map(\\"\\(.key)=\\(.value|tostring)\\")|.[]" | tr "\\n" " "
       - BROWSER_ENV=$(echo $BROWSER_ENV_JSON | jq -r "to_entries|map(\\"\\(.key)=\\(.value|tostring)\\")|.[]" | tr "\\n" " ")
       - echo $BROWSER_ENV
       - docker build --build-arg browser_env=$BROWSER_ENV -t "$(cat /tmp/build_tag.txt)" .
