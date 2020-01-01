@@ -2,7 +2,8 @@
 
 from troposphere.ecs import (
     TaskDefinition,
-    ContainerDefinition
+    ContainerDefinition,
+    Environment
 )
 from troposphere import ecs
 from awacs.aws import (
@@ -35,6 +36,12 @@ t.add_parameter(Parameter(
     Default="latest",
     Description="Tag to deploy"
 ))
+t.add_parameter(Parameter(
+    "NodeEnv",
+    Type="String",
+    Default="",
+    Description="Runtime environment variables"
+))
 
 t.add_resource(TaskDefinition(
     "task",
@@ -52,6 +59,9 @@ t.add_resource(TaskDefinition(
             Memory=32,
             Cpu=256,
             Name="helloworld",
+            Environment=[Environment(
+                Name="node_env",
+                Value=Ref("NodeEnv"))],
             PortMappings=[ecs.PortMapping(
                 ContainerPort=3000)]
         )

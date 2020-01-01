@@ -1,6 +1,11 @@
 {
     "Description": "Effective DevOps in AWS: ECS service - Helloworld",
     "Parameters": {
+        "NodeEnv": {
+            "Default": "",
+            "Description": "Runtime environment variables",
+            "Type": "String"
+        },
         "Tag": {
             "Default": "latest",
             "Description": "Tag to deploy",
@@ -101,6 +106,14 @@
                 "ContainerDefinitions": [
                     {
                         "Cpu": 256,
+                        "Environment": [
+                            {
+                                "Name": "node_env",
+                                "Value": {
+                                    "Ref": "NodeEnv"
+                                }
+                            }
+                        ],
                         "Image": {
                             "Fn::Join": [
                                 "",

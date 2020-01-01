@@ -175,9 +175,14 @@ t.add_resource(Pipeline(
                         "Capabilities": "CAPABILITY_NAMED_IAM",
                         "TemplatePath": "App::templates/helloworld-ecs-service-cf.template",
                         "RoleArn": GetAtt("CloudFormationHelloworldRole", "Arn"),
-                        "ParameterOverrides": """{"Tag": {
-                          "Fn::GetParam" : [ "BuildOutput", "build.json", "tag" ] }
-                          }"""
+                        "ParameterOverrides": """{
+                            "Tag": {
+                                "Fn::GetParam" : [ "BuildOutput", "build.json", "tag" ]
+                            },
+                            "NodeEnv": {
+                                "Fn::GetParam" : [ "BuildOutput", "build.json", "node_env" ]
+                            }
+                        }"""
                     },
                     InputArtifacts=[
                         InputArtifacts(
@@ -224,9 +229,14 @@ t.add_resource(Pipeline(
                         "Capabilities": "CAPABILITY_NAMED_IAM",
                         "TemplatePath": "App::templates/helloworld-ecs-service-cf.template",
                         "RoleArn": GetAtt("CloudFormationHelloworldRole", "Arn"),
-                        "ParameterOverrides": """{"Tag": {
-                          "Fn::GetParam" : [ "BuildOutput", "build.json", "tag" ] }
-                          }"""
+                        "ParameterOverrides": """{
+                            "Tag": {
+                                "Fn::GetParam" : [ "BuildOutput", "build.json", "tag" ]
+                            },
+                            "NodeEnv": {
+                                "Fn::GetParam" : [ "BuildOutput", "build.json", "node_env" ]
+                            }
+                        }"""
                     },
                     InputArtifacts=[
                         InputArtifacts(
