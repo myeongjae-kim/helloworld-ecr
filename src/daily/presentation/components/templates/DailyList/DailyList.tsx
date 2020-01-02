@@ -1,8 +1,8 @@
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
+import Optional from 'optional-js';
 import * as React from 'react';
 import { DailyDetailResponseDto, DailyListResponseDto } from 'src/daily/api';
 import EachDaily from './EachDaily';
-import Optional from 'optional-js';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   dailyList: {
