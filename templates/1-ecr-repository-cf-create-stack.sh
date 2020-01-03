@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-python ecr-repository-cf-template.py > ecr-repository-cf.template
+python 1-ecr-repository-cf-template.py > 1-ecr-repository-cf.template
 
 aws cloudformation create-stack \
 --stack-name helloworld-ecr \
