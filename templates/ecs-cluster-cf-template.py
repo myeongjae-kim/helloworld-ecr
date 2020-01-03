@@ -126,7 +126,7 @@ t.add_resource(LaunchConfiguration(
     KeyName=Ref("KeyPair"),
     SecurityGroups=[Ref("SecurityGroup")],
     IamInstanceProfile=Ref('EC2InstanceProfile'),
-    InstanceType='t2.small',
+    InstanceType='t2.medium',
     AssociatePublicIpAddress='true',
 ))
 
