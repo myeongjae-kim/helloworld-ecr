@@ -56,8 +56,8 @@ t.add_resource(TaskDefinition(
                 ImportValue("helloworld-repo"),
                 ":",
                 Ref("Tag")]),
-            Memory=2048,
-            Cpu=256,
+            Memory=512,
+            Cpu=2048,
             Name="helloworld",
             Environment=[Environment(
                 Name="node_env",

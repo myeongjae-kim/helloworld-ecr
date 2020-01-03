@@ -2,7 +2,7 @@
 
 python 4-helloworld-ecs-service-cf-template.py > 4-helloworld-ecs-service-cf.template
 
-awsecr cloudformation create-stack \
+aws cloudformation create-stack \
 --stack-name staging-helloworld-service \
 --capabilities CAPABILITY_IAM \
 --template-body file://4-helloworld-ecs-service-cf.template \

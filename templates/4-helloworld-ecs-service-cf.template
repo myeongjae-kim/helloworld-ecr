@@ -105,7 +105,7 @@
             "Properties": {
                 "ContainerDefinitions": [
                     {
-                        "Cpu": 256,
+                        "Cpu": 2048,
                         "Environment": [
                             {
                                 "Name": "node_env",
@@ -137,7 +137,7 @@
                                 ]
                             ]
                         },
-                        "Memory": 2048,
+                        "Memory": 512,
                         "Name": "helloworld",
                         "PortMappings": [
                             {
