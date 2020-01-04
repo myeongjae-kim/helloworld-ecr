@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-python 4-helloworld-ecs-service-cf-template.py > 4-helloworld-ecs-service-cf.template
+python3 4-helloworld-ecs-service-cf-template.py > 4-helloworld-ecs-service-cf.template
 
 aws cloudformation create-stack \
 --stack-name staging-helloworld-service \

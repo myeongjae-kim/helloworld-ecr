@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-python 3-helloworld-ecs-alb-cf-template.py > 3-helloworld-ecs-alb-cf.template
+python3 3-helloworld-ecs-alb-cf-template.py > 3-helloworld-ecs-alb-cf.template
 
 aws cloudformation create-stack \
 --stack-name staging-alb-helloworld \

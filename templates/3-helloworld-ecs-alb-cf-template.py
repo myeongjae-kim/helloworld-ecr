@@ -33,8 +33,14 @@ t.add_resource(ec2.SecurityGroup(
     SecurityGroupIngress=[
         ec2.SecurityGroupRule(
             IpProtocol="tcp",
-            FromPort="3000",
-            ToPort="3000",
+            FromPort="80",
+            ToPort="80",
+            CidrIp="0.0.0.0/0",
+        ),
+        ec2.SecurityGroupRule(
+            IpProtocol="tcp",
+            FromPort="443",
+            ToPort="443",
             CidrIp="0.0.0.0/0",
         ),
     ],
@@ -64,7 +70,7 @@ t.add_resource(elb.TargetGroup(
     HealthyThresholdCount="5",
     Matcher=elb.Matcher(
         HttpCode="200"),
-    Port=3000,
+    Port=80,
     Protocol="HTTP",
     UnhealthyThresholdCount="3",
     VpcId=ImportValue(
@@ -77,13 +83,30 @@ t.add_resource(elb.TargetGroup(
 ))
 
 t.add_resource(elb.Listener(
-    "Listener",
-    Port="3000",
-    Protocol="HTTP",
+    "HTTPSListener",
+    Port="443",
+    Protocol="HTTPS",
     LoadBalancerArn=Ref("LoadBalancer"),
     DefaultActions=[elb.Action(
         Type="forward",
         TargetGroupArn=Ref("TargetGroup")
+    )],
+    Certificates=[elb.Certificate(
+        CertificateArn="arn:aws:acm:ap-northeast-2:772278550552:certificate/8115428d-f80c-428b-a36e-5a1997f435cf")]
+))
+
+t.add_resource(elb.Listener(
+    "HTTPListener",
+    Port="80",
+    Protocol="HTTP",
+    LoadBalancerArn=Ref("LoadBalancer"),
+    DefaultActions=[elb.Action(
+        Type="redirect",
+        RedirectConfig=elb.RedirectConfig(
+            Protocol='HTTPS',
+            StatusCode='HTTP_301',
+            Port='443',
+        )
     )]
 ))
 
@@ -97,7 +120,7 @@ t.add_output(Output(
 t.add_output(Output(
     "URL",
     Description="Helloworld URL",
-    Value=Join("", ["http://", GetAtt("LoadBalancer", "DNSName"), ":3000"])
+    Value=Join("", ["https://", GetAtt("LoadBalancer", "DNSName"), ":443"])
 ))
 
 print(t.to_json())

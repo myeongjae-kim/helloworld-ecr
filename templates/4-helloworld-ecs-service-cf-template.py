@@ -63,7 +63,7 @@ t.add_resource(TaskDefinition(
                 Name="node_env",
                 Value=Ref("NodeEnv"))],
             PortMappings=[ecs.PortMapping(
-                ContainerPort=3000)]
+                ContainerPort=80)]
         )
     ],
 ))
@@ -97,7 +97,7 @@ t.add_resource(ecs.Service(
     TaskDefinition=Ref("task"),
     LoadBalancers=[ecs.LoadBalancer(
         ContainerName="helloworld",
-        ContainerPort=3000,
+        ContainerPort=80,
         TargetGroupArn=ImportValue(
             Join(
                 "-",
