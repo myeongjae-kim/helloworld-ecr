@@ -91,6 +91,7 @@ t.add_resource(elb.Listener(
         Type="forward",
         TargetGroupArn=Ref("TargetGroup")
     )],
+    # SSL certificate for https.
     Certificates=[elb.Certificate(
         CertificateArn="arn:aws:acm:ap-northeast-2:772278550552:certificate/8115428d-f80c-428b-a36e-5a1997f435cf")]
 ))
